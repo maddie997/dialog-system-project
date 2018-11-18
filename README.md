@@ -13,3 +13,12 @@
 `source env/bin/activate`
 3. Install requirements
 `pip install -r requirements.txt`
+
+## tf-idf
+`python tfidf/model.py`
+
+`
+Computing 1 in 2 R@1: 75%
+Computing 1 in 10 R@1: 50%
+Computing 1 in 10 R@5: 77%
+`
