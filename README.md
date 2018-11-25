@@ -15,9 +15,10 @@
 `pip install -r requirements.txt`
 4. Get the data and embeddings and place them inside the data directory:
 
-Download training/validation/test sets from: https://drive.google.com/open?id=1SpwZUtk91GLCVPZYdZr9McFWvMnwjmPY
+ - Download training/validation/test sets from: https://drive.google.com/open?id=1SpwZUtk91GLCVPZYdZr9McFWvMnwjmPY
 
-Download word embeddings: glove.840B.300d.zip
+ - Download word embeddings: http://nlp.stanford.edu/data/glove.840B.300d.zip
+
 
 ## tf-idf
 `python tfidf/model.py`
