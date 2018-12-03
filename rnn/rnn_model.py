@@ -175,12 +175,13 @@ class CustomLayer(Layer):
         super(CustomLayer, self).build(input_shape)
 
     def call(self, x, mask=None):
-        context, response = x
-        return -K.mean(K.dot(context,response), axis=-1, keepdims=True)
+        # TODO: implement the c_prime context and dot product with original context
+        # TODO: make sure it also works with batch_size
+        return None
 
     def get_output_shape_for(self, input_shape):
-        context, response = input_shape
-        return (context[0],1)
+        # TODO:
+        return None
 
 
 def main():
