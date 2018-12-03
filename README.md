@@ -13,7 +13,7 @@
 `source env/bin/activate`
 3. Install requirements
 `pip install -r requirements.txt`
-4. Get the data and embeddings and place them inside the data directory:
+4. Get the data and embeddings and place them inside the **/data** directory:
 
  - Download training/validation/test sets from: https://drive.google.com/open?id=1SpwZUtk91GLCVPZYdZr9McFWvMnwjmPY
 
