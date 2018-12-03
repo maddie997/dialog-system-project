@@ -17,7 +17,9 @@
 
  - Download training/validation/test sets from: https://drive.google.com/open?id=1SpwZUtk91GLCVPZYdZr9McFWvMnwjmPY
 
- - Download word embeddings: http://nlp.stanford.edu/data/glove.840B.300d.zip
+ - Download 50-d word embeddings (Used for model development): http://nlp.stanford.edu/data/glove.6B.zip
+
+ - Download 300-d word embeddings: http://nlp.stanford.edu/data/glove.840B.300d.zip
 
 
 ## tf-idf
@@ -30,3 +32,8 @@ Computing 1 in 10 R@1: 50%
 
 Computing 1 in 10 R@5: 77%
 ````
+## RNN
+`python rnn/rnn_model.py`
+
+
+Make sure you have **valid.csv** and 50-d word embeddings in your **/data** directory before running this model.
