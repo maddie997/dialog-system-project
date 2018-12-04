@@ -15,8 +15,9 @@ import time
 
 MAX_SEQUENCE_LEN = 160
 WORD_EMBEDDINGS_LEN = 50
-UNITS = 10
+UNITS = 100
 DEBUG = True
+BATCH_SIZE = 32
 
 # Load the training data, generate a mix where 50% are correct and 50% are incorrect.
 # the samples are then shuffled and then returned with their respective labels
@@ -148,16 +149,21 @@ def create_model(embeddings_matrix, vocab_size, context, response, labels):
     c_x = rnn_layer(c_x)
     r_x = rnn_layer(r_x)
 
-    #combined = CustomLayer(output_dim=-1)([c_x, r_x])
-    combined = layers.Dot(axes=-1)([c_x, r_x])
+    # This layer needs to be fixed, multiplication by
+    # the context is missing
+    combined = CustomLayer(output_dim=UNITS)([c_x, r_x])
+
+    # Subtracting context - response works but I'm not sure about the actual
+    # meaning on the vectors
+    #combined = layers.Subtract()([c_x, r_x])
 
     preds = layers.Dense(units=1, activation='sigmoid')(combined)
 
     siamese_model = Model(inputs=[context_input, response_input], outputs=preds)
     op = Adam(lr=0.0001, clipvalue=10.0)
     siamese_model.compile(loss='binary_crossentropy', optimizer=op, metrics=['acc'])
-    #siamese_model.summary()
-    siamese_model.fit([context, response], labels, batch_size=32, epochs=100)
+    siamese_model.summary()
+    siamese_model.fit([context, response], labels, batch_size=BATCH_SIZE, epochs=20)
 
 
 class CustomLayer(Layer):
@@ -168,20 +174,23 @@ class CustomLayer(Layer):
     def build(self, input_shape):
         context, response = input_shape
         self.kernel = self.add_weight(name='kernel',
-                                      shape=(response[1], response[1]),
+                                      shape=(response[1],self.output_dim),
                                       initializer='uniform',
+                                      dtype='float32',
                                       trainable=True)
 
         super(CustomLayer, self).build(input_shape)
 
     def call(self, x, mask=None):
-        # TODO: implement the c_prime context and dot product with original context
-        # TODO: make sure it also works with batch_size
-        return None
+        context, response = x
+        context_prime = K.dot(response, self.kernel)
+        # missing context to context_prime dot product
+        return context_prime
+
 
     def get_output_shape_for(self, input_shape):
-        # TODO:
-        return None
+        context, response = input_shape
+        return (input_shape[0], input_shape[1])
 
 
 def main():
