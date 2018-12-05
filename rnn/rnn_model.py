@@ -3,7 +3,7 @@ import pandas as pd
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
 from keras.models import Sequential, Model
-from keras.layers import Embedding, Input, Dense, Add
+from keras.layers import Embedding, Input, Dense
 from keras import backend as K
 from keras import layers
 from keras.initializers import RandomUniform
@@ -134,6 +134,12 @@ def prepare_data():
 
     return embeddings_matrix, vocab_size, tokenized_context, tokenized_response, labels
 
+def distance(x, y):
+    return K.exp(-K.sum(K.abs(x-y), axis=1, keepdims=True))
+
+def distance_output(input_shape):
+    return (input_shape[0][0], 1)
+
 def create_model(embeddings_matrix, vocab_size, context, response, labels):
 
     context_input = Input(shape=(MAX_SEQUENCE_LEN, ), dtype='float32')
@@ -141,7 +147,7 @@ def create_model(embeddings_matrix, vocab_size, context, response, labels):
 
     init = RandomUniform(minval=-0.01, maxval=0.01)
     embeddings_layer = Embedding(vocab_size, WORD_EMBEDDINGS_LEN, weights=[embeddings_matrix], input_length=MAX_SEQUENCE_LEN, trainable=True)
-    rnn_layer = layers.SimpleRNN(units=UNITS, kernel_initializer=init)
+    rnn_layer = layers.LSTM(units=UNITS, kernel_initializer=init, dropout=0.2)
 
     c_x = embeddings_layer(context_input)
     r_x = embeddings_layer(response_input)
@@ -151,19 +157,16 @@ def create_model(embeddings_matrix, vocab_size, context, response, labels):
 
     # This layer needs to be fixed, multiplication by
     # the context is missing
-    combined = CustomLayer(output_dim=UNITS)([c_x, r_x])
+    preds = CustomLayer(output_dim=UNITS)([c_x, r_x])
+    preds = layers.Dot(axes=-1)([preds, c_x])
 
-    # Subtracting context - response works but I'm not sure about the actual
-    # meaning on the vectors
-    #combined = layers.Subtract()([c_x, r_x])
-
-    preds = layers.Dense(units=1, activation='sigmoid')(combined)
+    preds = Dense(1, activation='sigmoid')(preds)
 
     siamese_model = Model(inputs=[context_input, response_input], outputs=preds)
     op = Adam(lr=0.0001, clipvalue=10.0)
-    siamese_model.compile(loss='binary_crossentropy', optimizer=op, metrics=['acc'])
+    siamese_model.compile(loss='binary_crossentropy', optimizer=op, metrics=['acc', 'binary_accuracy'])
     siamese_model.summary()
-    siamese_model.fit([context, response], labels, batch_size=BATCH_SIZE, epochs=20)
+    siamese_model.fit([context, response], labels, batch_size=BATCH_SIZE, epochs=100, validation_split=0.1)
 
 
 class CustomLayer(Layer):
@@ -172,25 +175,29 @@ class CustomLayer(Layer):
         super(CustomLayer, self).__init__(**kwargs)
 
     def build(self, input_shape):
-        context, response = input_shape
-        self.kernel = self.add_weight(name='kernel',
-                                      shape=(response[1],self.output_dim),
+        _, response = input_shape
+        self.M = self.add_weight(name='M',
+                                      shape=(response[1], self.output_dim),
                                       initializer='uniform',
                                       dtype='float32',
                                       trainable=True)
+        self.b = self.add_weight(name='b',
+                                 shape=(self.output_dim,),
+                                 initializer='uniform',
+                                 dtype='float32',
+                                 trainable=True)
 
         super(CustomLayer, self).build(input_shape)
 
     def call(self, x, mask=None):
         context, response = x
-        context_prime = K.dot(response, self.kernel)
-        # missing context to context_prime dot product
-        return context_prime
+        c_prime = K.dot(response, self.M) + self.b
+        return c_prime
 
 
     def get_output_shape_for(self, input_shape):
         context, response = input_shape
-        return (input_shape[0], input_shape[1])
+        return (response[0], self.output_dim)
 
 
 def main():
