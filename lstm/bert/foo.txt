@@ -1,0 +1,76 @@
+WARNING:tensorflow:From udc_train.py:42: RunConfig.__init__ (from tensorflow.contrib.learn.python.learn.estimators.run_config) is deprecated and will be removed in a future version.
+Instructions for updating:
+When switching to tf.estimator.Estimator, use tf.estimator.RunConfig instead.
+WARNING:tensorflow:From /home/mpandey/.local/lib/python3.6/site-packages/tensorflow/contrib/learn/python/learn/estimators/estimator.py:1180: BaseEstimator.__init__ (from tensorflow.contrib.learn.python.learn.estimators.estimator) is deprecated and will be removed in a future version.
+Instructions for updating:
+Please replace uses of any Estimator from tf.contrib.learn with an Estimator from tf.estimator.*
+INFO:tensorflow:Using config: {'_task_type': None, '_task_id': 0, '_cluster_spec': <tensorflow.python.training.server_lib.ClusterSpec object at 0x7efde3ca78d0>, '_master': '', '_num_ps_replicas': 0, '_num_worker_replicas': 0, '_environment': 'local', '_is_chief': True, '_evaluation_master': '', '_train_distribute': None, '_eval_distribute': None, '_device_fn': None, '_tf_config': gpu_options {
+  per_process_gpu_memory_fraction: 1.0
+}
+, '_tf_random_seed': None, '_save_summary_steps': 100, '_save_checkpoints_secs': 600, '_log_step_count_steps': 100, '_protocol': None, '_session_config': None, '_save_checkpoints_steps': None, '_keep_checkpoint_max': 5, '_keep_checkpoint_every_n_hours': 10000, '_model_dir': '/home/mpandey/ubuntu_dialogue/cs230_project/dialog-system-project/lstm/chatbot-retrieval/runs/1544517810'}
+WARNING:tensorflow:From /home/mpandey/ubuntu_dialogue/cs230_project/dialog-system-project/lstm/chatbot-retrieval/udc_metrics.py:11: MetricSpec.__init__ (from tensorflow.contrib.learn.python.learn.metric_spec) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.estimator.EstimatorSpec.eval_metric_ops.
+WARNING:tensorflow:From /home/mpandey/.local/lib/python3.6/site-packages/tensorflow/contrib/learn/python/learn/monitors.py:279: BaseMonitor.__init__ (from tensorflow.contrib.learn.python.learn.monitors) is deprecated and will be removed after 2016-12-05.
+Instructions for updating:
+Monitors are deprecated. Please use tf.train.SessionRunHook.
+WARNING:tensorflow:From /home/mpandey/ubuntu_dialogue/cs230_project/dialog-system-project/lstm/chatbot-retrieval/udc_inputs.py:46: read_batch_features (from tensorflow.contrib.learn.python.learn.learn_io.graph_io) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.data.
+WARNING:tensorflow:From /home/mpandey/.local/lib/python3.6/site-packages/tensorflow/contrib/learn/python/learn/learn_io/graph_io.py:833: read_keyed_batch_features (from tensorflow.contrib.learn.python.learn.learn_io.graph_io) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.data.
+WARNING:tensorflow:From /home/mpandey/.local/lib/python3.6/site-packages/tensorflow/contrib/learn/python/learn/learn_io/graph_io.py:542: read_keyed_batch_examples (from tensorflow.contrib.learn.python.learn.learn_io.graph_io) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.data.
+WARNING:tensorflow:From /home/mpandey/.local/lib/python3.6/site-packages/tensorflow/contrib/learn/python/learn/learn_io/graph_io.py:423: string_input_producer (from tensorflow.python.training.input) is deprecated and will be removed in a future version.
+Instructions for updating:
+Queue-based input pipelines have been replaced by `tf.data`. Use `tf.data.Dataset.from_tensor_slices(string_tensor).shuffle(tf.shape(input_tensor, out_type=tf.int64)[0]).repeat(num_epochs)`. If `shuffle=False`, omit the `.shuffle(...)`.
+WARNING:tensorflow:From /home/mpandey/.local/lib/python3.6/site-packages/tensorflow/python/training/input.py:276: input_producer (from tensorflow.python.training.input) is deprecated and will be removed in a future version.
+Instructions for updating:
+Queue-based input pipelines have been replaced by `tf.data`. Use `tf.data.Dataset.from_tensor_slices(input_tensor).shuffle(tf.shape(input_tensor, out_type=tf.int64)[0]).repeat(num_epochs)`. If `shuffle=False`, omit the `.shuffle(...)`.
+WARNING:tensorflow:From /home/mpandey/.local/lib/python3.6/site-packages/tensorflow/python/training/input.py:188: limit_epochs (from tensorflow.python.training.input) is deprecated and will be removed in a future version.
+Instructions for updating:
+Queue-based input pipelines have been replaced by `tf.data`. Use `tf.data.Dataset.from_tensors(tensor).repeat(num_epochs)`.
+WARNING:tensorflow:From /home/mpandey/.local/lib/python3.6/site-packages/tensorflow/python/training/input.py:197: QueueRunner.__init__ (from tensorflow.python.training.queue_runner_impl) is deprecated and will be removed in a future version.
+Instructions for updating:
+To construct input pipelines, use the `tf.data` module.
+WARNING:tensorflow:From /home/mpandey/.local/lib/python3.6/site-packages/tensorflow/python/training/input.py:197: add_queue_runner (from tensorflow.python.training.queue_runner_impl) is deprecated and will be removed in a future version.
+Instructions for updating:
+To construct input pipelines, use the `tf.data` module.
+WARNING:tensorflow:From /home/mpandey/.local/lib/python3.6/site-packages/tensorflow/contrib/learn/python/learn/learn_io/graph_io.py:317: TFRecordReader.__init__ (from tensorflow.python.ops.io_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Queue-based input pipelines have been replaced by `tf.data`. Use `tf.data.TFRecordDataset`.
+WARNING:tensorflow:From /home/mpandey/.local/lib/python3.6/site-packages/tensorflow/contrib/learn/python/learn/learn_io/graph_io.py:449: shuffle_batch_join (from tensorflow.python.training.input) is deprecated and will be removed in a future version.
+Instructions for updating:
+Queue-based input pipelines have been replaced by `tf.data`. Use `tf.data.Dataset.interleave(...).shuffle(min_after_dequeue).batch(batch_size)`.
+WARNING:tensorflow:From /home/mpandey/.local/lib/python3.6/site-packages/tensorflow/contrib/learn/python/learn/learn_io/graph_io.py:550: queue_parsed_features (from tensorflow.contrib.learn.python.learn.learn_io.graph_io) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.data.
+INFO:tensorflow:No glove/vocab path specificed, starting with random embeddings.
+WARNING:tensorflow:From /home/mpandey/ubuntu_dialogue/cs230_project/dialog-system-project/lstm/chatbot-retrieval/udc_model.py:13: get_global_step (from tensorflow.contrib.framework.python.ops.variables) is deprecated and will be removed in a future version.
+Instructions for updating:
+Please switch to tf.train.get_global_step
+WARNING:tensorflow:From /home/mpandey/.local/lib/python3.6/site-packages/tensorflow/contrib/learn/python/learn/estimators/estimator.py:1241: ModelFnOps.__new__ (from tensorflow.contrib.learn.python.learn.estimators.model_fn) is deprecated and will be removed in a future version.
+Instructions for updating:
+When switching to tf.estimator.Estimator, use tf.estimator.EstimatorSpec. You can use the `estimator_spec` method to create an equivalent one.
+INFO:tensorflow:Create CheckpointSaverHook.
+INFO:tensorflow:Graph was finalized.
+2018-12-11 00:43:31.876826: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2018-12-11 00:43:31.973213: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:964] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2018-12-11 00:43:31.973562: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1432] Found device 0 with properties: 
+name: GeForce GTX 970 major: 5 minor: 2 memoryClockRate(GHz): 1.38
+pciBusID: 0000:01:00.0
+totalMemory: 3.94GiB freeMemory: 3.49GiB
+2018-12-11 00:43:31.973584: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1511] Adding visible gpu devices: 0
+2018-12-11 00:43:32.741082: I tensorflow/core/common_runtime/gpu/gpu_device.cc:982] Device interconnect StreamExecutor with strength 1 edge matrix:
+2018-12-11 00:43:32.741106: I tensorflow/core/common_runtime/gpu/gpu_device.cc:988]      0 
+2018-12-11 00:43:32.741110: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1001] 0:   N 
+2018-12-11 00:43:32.741243: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1115] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 3209 MB memory) -> physical GPU (device: 0, name: GeForce GTX 970, pci bus id: 0000:01:00.0, compute capability: 5.2)
+INFO:tensorflow:Running local_init_op.
+INFO:tensorflow:Done running local_init_op.
+WARNING:tensorflow:From /home/mpandey/.local/lib/python3.6/site-packages/tensorflow/python/training/monitored_session.py:804: start_queue_runners (from tensorflow.python.training.queue_runner_impl) is deprecated and will be removed in a future version.
+Instructions for updating:
+To construct input pipelines, use the `tf.data` module.
+INFO:tensorflow:Saving checkpoints for 0 into /home/mpandey/ubuntu_dialogue/cs230_project/dialog-system-project/lstm/chatbot-retrieval/runs/1544517810/model.ckpt.
+INFO:tensorflow:loss = 1.0341434, step = 0

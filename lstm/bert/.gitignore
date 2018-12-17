@@ -1,0 +1,14 @@
+.DS_Store
+
+
+tmp/
+data/
+runs/
+__pycache__
+models_bkup_121118_8pm
+lstm*.txt
+tmp*/
+*~
+*.*~
+uncased*
+uncased*/

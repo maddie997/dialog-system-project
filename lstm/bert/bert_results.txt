@@ -1,0 +1,8 @@
+INFO:tensorflow:Restoring parameters from /home/mpandey/ubuntu_dialogue/cs230_project/dialog-system-project/lstm/bert/runs/1544800552/model.ckpt-0
+INFO:tensorflow:Running local_init_op.
+INFO:tensorflow:Done running local_init_op.
+INFO:tensorflow:Finished evaluation at 2018-12-14-15:16:03
+INFO:tensorflow:Saving dict for global step 0: global_step = 0, loss = 101.3924, recall_at_1 = 0.8379856850715747, recall_at_10 = 1.0, recall_at_2 = 0.8388036809815951, recall_at_5 = 0.848364008179959
+INFO:tensorflow:Validation (step 20000): recall_at_1 = 0.8379856850715747, recall_at_10 = 1.0, recall_at_2 = 0.8388036809815951, recall_at_5 = 0.848364008179959, loss = 101.3924, global_step = 0
+INFO:tensorflow:loss = 11.303761, step = 20000 (6.079 sec)
+INFO:tensorflow:global_step/sec: 16.4396
